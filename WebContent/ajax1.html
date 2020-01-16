@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("button").click(function(){
+			$.ajax({
+				url:"ajax1Test.jsp",
+				type:"get",
+				data:{"id":$("#id").val()}, //서버로 보낼 데이터. json 형식으로 사용
+				success:function(res){ //서버 처리 완료 후 호출됨, res: 서버가 보내주는 데이터가 들어감
+					console.log(res);
+					$("#result").html(res);
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+	아이디 <input type="text" id="id" />
+	<button>중복확인</button>
+	
+	<hr />
+	
+	<div id="result">결과값</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	h1.title {
+		font-size: large;
+		border-left: 10px solid #7baeb5;
+		border-bottom: 1px solid #7baeb5;
+		padding: 10px;
+	}
+	
+	div.exec, div.result {
+		padding: 20px 15px;
+		border-bottom: 1px solid #7baeb5;
+	}
+	
+	div.example {
+		padding: 10px 30px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		var category3Sub = 4
+		
+		$("#category1").load("load_data2.html #category1-1");
+		
+		$(document).on("change", "#category1 select", function(){
+			//date-target 속성값
+			var target = $(this).find("option:selected").attr("data-target");
+			$("#category2").load("load_data2.html " + target);
+			$('.result').html("");
+			
+			if($("#category1 select option:eq(0)").prop("selected")){
+				for(var i=1; i<=category3Sub; i++){
+					$("#category3-"+i).remove();
+				}
+			}
+			$("#category2 select option:eq(0)").prop("selected", true);
+			$("#category3 select option:eq(0)").prop("selected", true);
+		})
+		
+		$(document).on("change", "#category2 select", function(){
+			var target = $(this).find("option:selected").attr("data-target");
+			$("#category3").load("load_data2.html " + target);
+		})
+		
+		$(document).on("change", "#category3 select", function(){
+			var val1 = $("#category1 select").val();			
+			var val2 = $("#category2 select").val();
+			var val3 = $(this).val();
+			
+			$('.result').html("<p>"+val1+" > "+val2+" > "+val3+"</p>");
+		})
+	})
+</script>
+</head>
+<body>
+	<h1 class="title">동적 드롭다운</h1>
+	<div class="exec">
+		<form>
+			<span id="category1"></span>
+			<span id="category2"></span>
+			<span id="category3"></span>
+		</form>
+	</div>
+	<div class="result"></div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("#box").load("load_data.txt #test"); //데이터 중 특정내용만 보이게 할 때 데이터파일 뒤에 선택자를 붙임
+	})
+</script>
+</head>
+<body>
+	<div id="box">내용이 들어갈 공간</div>
+</body>
+</html>
