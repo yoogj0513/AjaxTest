@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	ul {
+		list-style: none;
+	}
+	
+	#container {
+		padding: 30px 20px;
+	}
+	
+	h1 {
+		font-size: large;
+		border-left: 10px solid #7baeb5;
+		border-bottom: 1px solid #7baeb5;
+		padding: 10px;
+	}
+	
+	#comment_write {
+		padding: 20px 15px;
+		border-bottom: 1px solid #7baeb5;
+	}
+	
+	#comment_write label {
+		display: inline-block;
+		width: 80px;
+		font-size: 14px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	
+	#comment_write input[type='text'],
+	#comment_write textarea {
+		border: 1px solid #ccc;
+		vertical-align: middle;
+		padding: 3px 10px;
+		font-size: 12px;
+		line-height: 150%;
+	}
+	
+	#comment_write textarea {
+		width: 380px;
+		height: 90px;
+	}
+	
+	.comment_item {
+		font-size: 13px;
+		color: #333;
+		padding: 15px;
+		border-bottom: 1px dotted #ccc;
+		line-height: 150%;
+	}
+	
+	.comment_item .writer {
+		color: #555;
+		line-height: 200%;
+	}
+	
+	.comment_item .writer .name {
+		font-weight: bold;
+		color: #222;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		//화면이 실행되자마자 나타나게 하기 위해 바로 ajax요청
+		$.ajax({
+			url:"ajax5Data.xml",
+			type:"get",
+			dataType:"xml",
+			success:function(res){
+				console.log(res);
+				
+				$(res).find("item").each(function(i, obj){
+					var name = $(obj).find("writer").html();
+					var time = $(obj).find("datetime").html();
+					var content = $(obj).find("content").html();
+					
+					// $("<li>") : (빈)li태그 객체를 새로 만듬<li></li>
+					// $는 안붙쳐도 가능하지만 제이쿼리 객체라는 것을 표시하기 위해 붙임
+					var $li = $("<li>").addClass("comment_item");
+					var $pWriter = $("<p>").addClass("writer");
+					var $spanName = $("<span>").addClass("name").html(name);
+					var $spanTime = $("<span>").html(time);
+					var $inputDel = $("<input>").addClass("btnDel")
+												.attr("type", "button").val("삭제하기");
+					
+					$pWriter.append($spanName).append($spanTime).append($inputDel);
+					$li.append($pWriter);
+					
+					var $p = $("<p>").html(content);
+					$li.append($p);
+					
+					$("ul#commnet_list").append($li);
+				})
+			}
+		})
+	})
+</script>
+</head>
+<body>
+	<div id="container">
+		<h1>jQuery Comment</h1>
+		<div id="comment_write">
+			<form id="comment_form">
+				<div>
+					<label>작성자</label>
+					<input type="text" id="user_name">
+					<input type="submit" value="저장하기">
+				</div>
+				<div>
+					<label>댓글 내용</label>
+					<textarea id="comment"></textarea>
+				</div>
+			</form>
+		</div>
+		<ul id="commnet_list">
+			<!-- <li class="comment_item">
+				<p class="writer">
+					<span class="name">이쁘니님</span>
+					<span>/ 2015-11-22</span>
+					<input type="button" value="삭제하기" class="btnDel">
+				</p>
+				<p>Ajax로 구현하는 댓글 내용</p>
+			</li> -->
+		</ul>
+	</div>
+</body>
+</html>

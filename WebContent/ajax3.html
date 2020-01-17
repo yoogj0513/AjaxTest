@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	h1.title {
+		font-size: large;
+		border-left: 10px solid #7baeb5;
+		border-bottom: 1px solid #7baeb5;
+		padding: 10px;
+	}
+	
+	div.exec, div.result {
+		padding: 20px 15px;
+		border-bottom: 1px solid #7baeb5;
+	}
+	
+	div.example {
+		padding: 10px 30px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("#btn1").click(function() {
+			$.ajax({
+				url:"ajax3Data.xml",
+				type:"get",
+				dataType:"xml",
+				success:function(res){
+					console.log(res);
+					
+					$(res).find("rank").each(function(i, obj){ //rank1, rank2, rank3
+						var k = $(obj).find("k").html();
+						$(".result").append("<p>"+k+"</p>");
+					})
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+	<h1 class="title">동적 드롭다운</h1>
+	<div class="exec">
+		<button id="btn1">xml 데이터 가져오기</button>
+	</div>
+	<div class="result"></div>
+</body>
+</html>

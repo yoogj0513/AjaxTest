@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.box {
+		border-bottom: 1px solid #000;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$('button').click(function() {
+			$.ajax({
+				url:"ajax4Data.xml",
+				type:"get",
+				dataType:"xml",
+				success:function(res){
+					console.log(res);
+					
+					$(res).find("subject").each(function(i, obj) {
+						console.log(obj);
+						
+						var title = $(obj).find("title").html();
+						var time = $(obj).find("time").html();
+						var teacher = $(obj).find("teacher").html();
+						
+						var $divBox = $("<div>").addClass("box");
+						var $p1 = $("<p>").html(title);
+						var $p2 = $("<p>").html(time);
+						var $p3 = $("<p>").html(teacher);
+						
+						$divBox.append($p1).append($p2).append($p3);
+						
+						$("#result").append($divBox);
+					})
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+	<button>xml 가져오기</button>
+	<div id="result"></div>
+</body>
+</html>

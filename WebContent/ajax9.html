@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	#container {
+		width: 550px;
+		margin: 0 auto;
+		border: 1px solid #aaa;
+		overflow: hidden;
+	}
+	
+	h1 {
+		background-color: #ddd;
+		text-align: center;
+		margin-bottom: 20px;
+		padding: 10px;
+	}
+	
+	p {
+		font-size: 14px;
+	}
+	
+	.box {
+		float: left;
+		width: 50%;
+		height: 150px;
+		margin-bottom: 10px;
+	}
+	
+	.box img {
+		float: left;
+		height: 100%;
+		margin: 0 10px;
+	}
+	
+	.box .text {
+		margin-top: 10px;
+		line-height: 25px;
+	}
+	
+	.title {
+		color: blue;
+	}
+	
+	.time {
+		color: gray;
+		letter-spacing: -1px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$.ajax({
+			url:"ajax9Data.xml",
+			type:"get",
+			dataType:"xml",
+			success:function(res){
+				console.log(res);
+				
+				var h1Title = $(res).find("title").html();
+				var date = $(res).find("date").html();
+				var $h1 = $("<h1>").html(h1Title + "(" + date + ")");
+				
+				$("#container").append($h1);
+				
+				$(res).find("item").each(function(i, obj) {	
+					var title = $(obj).find("title").html();
+					var channel = $(obj).find("channel").html();
+					var time = $(obj).find("time").html();
+					var imgFile = $(obj).find("file").html();
+					
+					var $divBox = $("<div>").addClass("box");
+					var $img = $("<img>").attr("src", "images/"+imgFile);
+					var $divText = $("<div>").addClass("text");
+					var $h4Title = $("<h4>").addClass("title").html(title);
+					var $pCh = $("<p>").addClass("channel").html(channel)
+					var $pTime = $("<p>").addClass("time").html(time)
+					
+					$divText.append($h4Title).append($pCh).append($pTime);
+					$divBox.append($img).append($divText);
+					
+					$("#container").append($divBox);
+				})
+				
+			}
+		
+		})
+	})
+</script>
+</head>
+<body>	
+	<div id="container"></div>
+
+</body>
+</html>
