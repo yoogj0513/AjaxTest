@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.box {
+		border-bottom: 1px solid #aaa;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$('button').click(function() {
+			$.ajax({
+				url:"json3data.json",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					console.log(res);
+					
+					$("#result").empty();
+					
+					$(res.school.subject).each(function(i, obj) {
+						var title = obj.title;
+						var time = obj.time;
+						var teacher = obj.teacher;
+						
+						/* <div class="box">
+								<p>title</p>
+								<p>time</p>
+								<p>teacher</p>
+						</div> */
+						
+						var $p1 = $("<p>").text(title);
+						var $p2 = $("<p>").text(time);
+						var $p3 = $("<p>").text(teacher);
+						var $div = $("<div>").addClass("box").append($p1).append($p2).append($p3);
+						
+						$("#result").append($div);
+					})
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+	<h1>$.ajax()함수를 사용한 JSON데이터 읽기(2)</h1>
+	<button>JSON데이터 가져오기</button>
+	<div id="result"></div>
+</body>
+</html>

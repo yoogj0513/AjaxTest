@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	body {
+		font-family: "맑은 고딕", "굴림", Arial;
+		padding-bottom: 20px;
+	}
+	
+	ul#list {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	
+	ul#list li {
+		border-bottom: 1px dotted #ccc;
+		padding: 10px 20px;
+	}
+	
+	ul#list a {
+		color: #000;
+		text-decoration: none;
+	}
+	
+	ul#list li:hover {
+		background: #d9edf7;
+	}
+	
+	ul#list span {
+		display: block;
+	}
+	
+	ul#list .title {
+		font-size: 1.1em;
+		font-weight: bold;
+		line-height: 150%;
+	}
+	
+	ul#list .desc {
+		font-size: 1em;
+		white-space: nowrap; /* 줄바꿈 안됨 */
+		overflow: hidden; /* 화면 벗어나면 삭제 */
+		text-overflow: ellipsis; /* ... 붙임 */
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		
+		$("#topic").change(function(){
+			var address = $(this).val();
+			
+			$.ajax({
+				url:address,
+				type:"get",
+				dataType:"xml",
+				success:function(res){
+					console.log(res);
+					
+					$("#list").empty(); //html(""); / empty(); -> 선택자의 자식 모두 지우기
+					
+					$(res).find("item").each(function(i, obj){
+						var title = $(obj).find("title").text();
+						var link = $(obj).find("link").text();
+						var pubDate = $(obj).find("pubDate").text();
+						var desc = $(obj).find("description").text();
+						
+						var $title = $("<span>").addClass("title").text(title);
+						var $date = $("<span>").text(pubDate);
+						var $desc = $("<span>").addClass("desc").text(desc);
+						var $a = $("<a>").attr("href", link).append($title).append($date).append($desc);
+						var $li = $("<li>").append($a);
+						
+						$("#list").append($li);		
+					})
+				}
+			})
+			
+		})
+		
+		$("#topic").change();
+	})
+</script>
+</head>
+<body>
+	<h1 class="title">JTBC 뉴스 연동</h1>
+	<div class="exec">
+		<fieldset>
+			<label>뉴스 분야 선택</label>
+			<select id="topic">
+				<option value="http://fs.jtbc.joins.com/RSS/newsflash.xml">속보</option>
+				<option value="http://fs.jtbc.joins.com/RSS/society.xml">사회</option>
+				<option value="http://fs.jtbc.joins.com/RSS/international.xml">국제</option>
+				<option value="http://fs.jtbc.joins.com/RSS/culture.xml">문화</option>
+				<option value="http://fs.jtbc.joins.com/RSS/newsroom.xml">뉴스룸</option>
+			</select>
+		</fieldset>
+	</div>
+	<ul id="list">
+	</ul>
+</body>
+</html>

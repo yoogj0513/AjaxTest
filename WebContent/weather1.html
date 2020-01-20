@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$.ajax({
+			url: "weather1Data.jsp",
+			type: "get",
+			dataType:"xml",
+			success:function(res){
+				console.log(res);
+				
+				$(res).find("location").each(function(i, obj) {
+					var city = $(obj).find("city").text();
+					var tmn = $(obj).find("data:first").find("tmn").text();
+					var tmx = $(obj).find("data").eq(0).find("tmx").text();
+					var wf = $(obj).find("data").eq(0).find("wf").text();
+					
+					var $li = $("<li>").text(city + " 최저: " + tmn + ", 최고: " + tmx + ", " + wf); //<li>서울</li>
+					
+					$("#list").append($li);
+				})
+			}
+		})
+	})
+</script>
+</head>
+<body>
+	<h1>전국 날씨 정보</h1>
+	<ul id="list"></ul>
+</body>
+</html>

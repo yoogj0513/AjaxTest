@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$.ajax({
+			url:"weather2Data.jsp",
+			type:"get",
+			dataType:"xml",
+			success:function(res){
+				console.log(res);
+				
+				$(res).find("data").each(function(i, obj) {
+					var hour = $(obj).find("hour").text();
+					var temp = $(obj).find("temp").text();
+					var wfKor = $(obj).find("wfKor").text();
+					
+					var $li = $("<li>").text(hour + "시 / 온도 " + temp + " / " + wfKor);
+					$("#list").append($li);
+				})
+				
+				var dong = $(res).find("category").text();
+				$("h3").html(dong);
+			}
+		})
+	})
+</script>
+</head>
+<body>
+	<h1>우리 동네 날씨 정보</h1>
+	<h3 id="dong"></h3>
+	<ul id="list"></ul>
+</body>
+</html>

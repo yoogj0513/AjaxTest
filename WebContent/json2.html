@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("button").click(function(){
+			$.ajax({
+				url:"json2Data.json",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					console.log(res);
+					
+					$("#list").empty();
+					
+					// obj = {"k": "김연아"}
+					$(res.rank).each(function(i, obj) {
+						var k = obj.k;
+						var $li = $("<li>").html(k);
+						
+						$('#list').append($li);
+					})
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+	<button>가져오기</button>
+	<ul id="list"></ul>
+</body>
+</html>
