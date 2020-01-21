@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	
+	#container {
+		width: 800px;
+		margin: 10px auto;
+	}
+
+	h3 {
+		padding: 10px;
+		border-left: 10px solid #7baeb5;
+		border-bottom: 1px solid #7baeb5;
+		margin-bottom: 5px;
+	}
+	
+	.box {
+		height: 100px;
+		padding: 10px;
+		border-bottom: 1px solid #ddd;
+	}
+	
+	img {
+		height: 100%;
+		float: left;
+	}
+	
+	.text {
+		float: left;
+		line-height: 25px;
+		padding: 15px;
+	}
+	
+	.date {
+		font-size: 14px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$.ajax({
+			url:"exam_json_data.json",
+			type:"get",
+			dataType:"json",
+			success:function(res){				
+				$(res.list).each(function(i, obj) {
+					var img = obj.img;
+					var sbj = obj.subject;
+					var content = obj.content;
+					var date = obj.pubDate;
+					
+					var $img = $("<img>").attr("src", "images/"+img);
+					var $h4 = $("<h4>").html(sbj);
+					var $p1 = $("<p>").html(content);
+					var $p2 = $("<p>").addClass("date").html(date);
+					var $divText = $("<div>").addClass("text").append($h4).append($p1).append($p2);
+					var $divBox = $("<div>").addClass("box").append($img).append($divText);
+					
+					$("#container").append($divBox);
+				})
+			}
+		})
+	})
+</script>
+</head>
+<body>
+	<div id="container">	
+		<h3>커플의 모든것</h3>
+	</div>
+	
+</body>
+</html>
