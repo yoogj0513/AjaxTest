@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insert title here</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	
+	#title {
+		height: 30px;
+		background-color: #2b292b;
+		color: #fff;
+		padding: 15px;
+		text-align: center;
+		line-height: 30px;
+	}
+	
+	.box {
+		overflow: hidden;
+	}
+	
+	.box-title {
+		background-color: #b3e1ee;
+		padding: 20px 5px;
+		color: #103c5a;
+	}
+	
+	.wrap {
+		height: 60px;
+		border-bottom: 1px solid #fff;
+	}
+	
+	p {
+		color: #fff;
+		height: 100%;
+		font-size: 25px;
+		line-height: 60px;
+		text-align: center;
+	}
+	
+	img {
+		width: 40px;
+		padding-top: 10px;
+	}
+	
+	.time {
+		background-color: #5ba5c2;
+		width: 45%;
+		float: left;
+	}
+	
+	.icon {
+		background-color: #e5f4f9;
+		width: 20%;
+		
+		float: left;
+	}
+	
+	.temp {
+		background-color: #8dc6d9;
+		width: 35%;
+		float: left;
+	}
+	
+	@media screen and (min-width: 1023px) {
+		#container {
+			width: 500px;
+			margin: 0 auto;
+		} 
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$.ajax({
+			url:"weather2Data.jsp",
+			type:"get",
+			dataType:"xml",
+			success:function(res){
+				console.log(res);
+				$(res).find("data").each(function(i, obj) {
+					var imgs = ["weather_01.png", "weather_02.png", "weather_03.png", "weather_04.png", "weather_05.png"];
+					var wfArr = ["맑음", "흐림", "소나기", "비", "구름 많음"];
+					var divIds = ["#today", "#tomorrow", "#after-tomorrow"];
+					
+					var day = $(obj).find("day");
+					var dayTx = $(obj).find("day").text();
+					var hour = $(obj).find("hour").text();
+					var wfKor = $(obj).find("wfKor").text();
+					var temp = $(obj).find("temp").text();
+					
+					
+					var $img = $("<img>");
+					var $p1 = $("<p>").addClass("time");
+					var $p2 = $("<p>").addClass("icon");
+					var $p3 = $("<p>").addClass("temp");
+					var $div = $("<div>").addClass("wrap");
+					
+					$div.append($p1.text(hour + "시"));
+					for(var i=0; i<wfArr.length; i++){
+						if(wfKor == wfArr[i]) {
+							$img.attr("src", "images/"+imgs[i]);
+							$p2.append($img);
+							$div.append($p2);
+						}
+					}
+					$div.append($p3.text(temp + "도"));
+					
+					for(var i=0; i<divIds.length; i++){
+						if(dayTx == i) {
+							$(divIds[i]).append($div);
+						}
+					}
+				})
+			}
+		
+		})
+	})
+</script>
+</head>
+<body>
+	<div id="container">
+		<h4 id="title">기상청 날씨</h4>
+		<div id="today" class="box">
+			<h4 class="box-title">오늘</h4>
+		</div>
+		<div id="tomorrow" class="box">
+			<h4 class="box-title">내일</h4>
+		</div>
+		<div id="after-tomorrow" class="box">
+			<h4 class="box-title">모레</h4>
+		</div>
+	</div>
+</body>
+</html>

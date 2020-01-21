@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	
+	#container {
+		width: 900px;
+		margin: 30px auto;
+	}
+	
+	.box {
+		overflow: hidden;	
+		border-bottom: 1px solid #ddd;
+		padding: 10px 5px;
+	}
+	
+	.text {
+		float: left;
+		width: 65%;
+		line-height: 25px;
+		margin-top: 15px;
+	}
+	
+	.category {
+		font-size: 13px;
+		color: #0088CF;
+	}
+	
+	.title:hover {
+		color: #0088CF;
+	}
+	
+	.date {
+		font-size: 13px;
+		color: #B4AD9F;
+	}
+	
+	.content {
+		font-size: 14px;
+		line-height: 20px;
+	}
+	
+	.img {
+		float: right;
+		width: 30%;
+	}
+	
+	img {
+		width: 100%;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(function(){
+		$.ajax({
+			url:"kbsNewsData.jsp",
+			type:"get",
+			dataType:"xml",
+			success:function(res){
+				console.log(res);
+				
+				$(res).find("item").each(function(i, obj) {
+					var title = $(obj).find("title").text();
+					var dscpAll = $(obj).find("description").text();
+					var category = $(obj).find("category").text();
+					var img = $(obj).find("enclosure").attr("url");
+					var getDate = $(obj).find("pubDate").text().trim();
+					
+					var dscpArr= dscpAll.split("<BR>");
+					var dscp = dscpArr[1];
+					
+					var dateArr = getDate.split(", ");
+					var dateArr2 = dateArr[1];
+					console.log(dateArr2);
+					
+					
+					
+					//var date = "";
+					
+					var $pCtgr = $("<p>").addClass("category").text(category);
+					var $h3Tit = $("<h3>").addClass("title").text(title);
+					var $pDate = $("<p>").addClass("date").text(getDate);
+					var $pCt = $("<p>").addClass("content").html(dscp);
+					var $img = $("<img>").attr("src", img);
+					
+					var $divText = $("<div>").addClass("text").append($pCtgr).append($h3Tit).append($pDate).append($pCt);
+					var $divImg = $("<div>").addClass("img").append($img);
+					var $divBox = $("<div>").addClass("box").append($divText).append($divImg);
+					
+					
+					$("#container").append($divBox);
+					
+				})
+			}
+		})
+	})
+</script>
+</head>
+<body>
+	<div id="container"></div>
+</body>
+</html>

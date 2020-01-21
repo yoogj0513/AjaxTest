@@ -35,7 +35,7 @@
 	.text {
 		float: left;
 		line-height: 25px;
-		padding: 15px;
+		padding: 10px;
 	}
 	
 	.date {
@@ -59,7 +59,7 @@
 					var $img = $("<img>").attr("src", "images/"+img);
 					var $h4 = $("<h4>").html(sbj);
 					var $p1 = $("<p>").html(content);
-					var $p2 = $("<p>").addClass("date").html(date);
+					var $p2 = $("<p>").addClass("date").html("등록일시: "+date);
 					var $divText = $("<div>").addClass("text").append($h4).append($p1).append($p2);
 					var $divBox = $("<div>").addClass("box").append($img).append($divText);
 					
