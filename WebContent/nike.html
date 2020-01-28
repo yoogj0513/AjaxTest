@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	.container {
+		width: 1000px;
+		margin: 10px auto;
+		overflow: hidden;
+	}
+	
+	#top {
+		height: 30px;
+	}
+	
+	#category {
+		float: left;
+	}
+	
+	#category li {
+		list-style: none;
+		float: left;
+		margin-right: 5px;
+		line-height: 30px;
+	}
+	
+	#category li a {
+		color: gray;
+		text-decoration: none;
+	}
+	
+	#category li a:hover {
+		text-decoration: underline;
+	}
+	
+	#icons {
+		float: right;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div id="top">		
+			<ul id="category">
+				<li><a href="#">test1</a> > </li>
+				<li><a href="#">test2</a> > </li>
+				<li><a href="">tes3</a></li>
+			</ul>
+			<div id="icons">
+				<a href="#"><img src="images/icon01.png"></a>
+				<a href="#"><img src="images/icon02.png"></a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
