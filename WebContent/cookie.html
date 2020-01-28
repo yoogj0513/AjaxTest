@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	
+	body {
+		font-size: 12px;
+	}
+	
+	#notice_wrap {
+		width: 300px;
+		box-shadow: 0 0 8px black;
+		position: absolute;
+		left: 300px;
+		top: 150px;
+	}
+	
+	.close_wrap {
+		background-color: #000;
+		color: #fff;
+		text-align: right;
+		padding: 5px 10px;
+	}
+	
+	.close_wrap button {
+		margin-left: 20px;
+	}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- cookie 플러그인 (cdnjs.com 사이트에서 jquery-cookie 검색) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script>
+	$(function(){
+		//cookie 영역에 popup키가 있는지 체크  //있을 경우에 대한 설정 방법
+		if($.cookie("popup") == "none"){
+			$("#notice_wrap").css("display", "none");
+		}
+		
+		$("#btnClose").click(function(){
+			if($("#expireChk").prop("checked") == true){
+				//쿠키 저장
+				// 쿠키 이름(변수명), 값, 기간설정 {expires: 일자, path:"/"};
+				$.cookie("popup", "none", {expires: 3, path:"/"});
+			}
+			$("#notice_wrap").css("display", "none");
+		})
+	})
+</script>
+</head>
+<body>
+	<div id="notice_wrap">
+		<img src="images/window_object_1.jpg" alt="공지사항" />	
+		<p class="close_wrap">
+			<input type="checkbox" id="expireChk">
+			<label for="expireChk">3일 동안 이 창 열지않기</label>
+			<button id="btnClose">닫기</button>
+		</p>
+	</div>
+</body>
+</html>
