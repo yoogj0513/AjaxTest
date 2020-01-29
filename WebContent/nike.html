@@ -8,15 +8,20 @@
 		margin: 0;
 		padding: 0;
 	}
+	
+	li {
+		list-style: none;
+	}
 
 	.container {
-		width: 1000px;
+		width: 980px;
 		margin: 10px auto;
 		overflow: hidden;
 	}
 	
 	#top {
 		height: 30px;
+		margin-bottom: 30px;
 	}
 	
 	#category {
@@ -24,7 +29,6 @@
 	}
 	
 	#category li {
-		list-style: none;
 		float: left;
 		margin-right: 5px;
 		line-height: 30px;
@@ -33,6 +37,7 @@
 	#category li a {
 		color: gray;
 		text-decoration: none;
+		font-size: 14px;
 	}
 	
 	#category li a:hover {
@@ -42,21 +47,209 @@
 	#icons {
 		float: right;
 	}
+	
+	#img_wrap {
+		width: 470px;
+		float: left;
+	}
+	
+	#big_img {
+		width: 470px;
+		height: 470px;
+	}
+	
+	#big_img img {
+		width: 100%;
+	}
+	
+	#frame img {
+		width: 100%;
+	}
+	
+	#small_imgs {
+		position: relative;
+		margin-top: 20px;
+	}
+	
+	#small_imgs > a {
+		display: block;
+		position: absolute;
+		width: 15px;
+		height: 47px;
+		padding-top: 33px;
+	}
+	
+	#small_imgs > a:nth-of-type(1) {
+		left: 0;
+	}
+	
+	#small_imgs > a:nth-of-type(2) {
+		right: 0;
+		text-align: right;
+	}
+	
+	#frame {
+		width: 440px;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+	
+	/* #frame ul {
+		width: 810px;
+	} */
+	
+	#frame li {
+		float: left;
+		width: 78px;
+		height: 78px;
+		margin-right: 10px;
+	}
+	
+	#frame li:nth-of-type(n+2) a {
+		text-align: center;
+	}
+	
+	#frame li:nth-of-type(n+2) img {
+		width: 95%;
+		margin-top: 3px;
+	}
+	
+	
+	#frame a {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+	
+	.border_color {
+		border: 1px solid #ddd;
+	}
+	
+	.on {
+		border-color: blue;
+	}
+	
+	#order_wrap {
+		width: 470px;
+		float: right;
+	}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- jquery ui plugin 사용 -->
+<script src="js/jquery-ui.min.js"></script>
+<script>
+
+	$(function(){
+		var imgIdx = 1;
+		
+		$.ajax({
+			url:"nike_data.json",
+			type:"get",
+			dataType:"json",
+			success:function(res){
+				console.log(res);
+				
+				//top-category				
+				var $a1 = $("<a>").attr("href", "#").text(res.depth1 + " > ");
+				var $a2 = $("<a>").attr("href", "#").text(res.depth2 + " > ");
+				var $a3 = $("<a>").attr("href", "#").text(res.depth3);
+				var $li1 = $("<li>").append($a1);
+				var $li2 = $("<li>").append($a2);
+				var $li3 = $("<li>").append($a3);
+				
+				$("#category").append($li1).append($li2).append($li3);
+				
+				
+				//img-wrap
+				var imgForder = "images/";
+				var mainImg = imgForder + res.main;
+				var $imgM = $("<img>").attr("src", mainImg).attr("alt", "메인");
+				$("#big_img").append($imgM);
+				
+				$("#small_wrap").html("<li class='border_color on'><a href='#'><img src='"+mainImg+"' alt='메인'></a></li>");
+				
+				$(res.items).each(function(i, obj) {
+					var $imgS = $("<img>");
+					var $aImgS = $("<a>").attr("href", "#").append($imgS);
+					var $liImgS = $("<li>").addClass("border_color").append($aImgS);
+					
+					$imgS.attr("src", imgForder+obj.image).attr("alt", "img");
+					$aImgS.append($imgS);
+					$liImgS.append($aImgS);
+					
+					$("#small_wrap").append($liImgS);
+					
+					imgIdx++;
+				})
+				
+				var ulW = 90 * imgIdx;
+				$("#small_wrap").css("width", ulW+"px");
+				
+				var index = 0;
+				var frameW = $("#frame").css("width").replace("px", "");
+				
+				$("#next").click(function(){
+					index--;
+					var marginList = index * frameW;
+					if(marginList+ulW < 0){
+						marginList = 0;
+						index = 0;
+						$("#small_wrap").css("margin-left", marginList);
+						return;
+					}
+					
+					$("#small_wrap").css("margin-left", marginList);
+					return false;
+				})
+				
+				$("#prev").click(function(){
+					index++;
+					var marginList = index * frameW;
+					
+					if(marginList > 0) {
+						var lastIdx = Math.floor(ulW/frameW);
+						var marginList = -((frameW * lastIdx) + 10);
+						index = -lastIdx;
+						$("#small_wrap").css("margin-left", marginList);
+						return;
+					}
+					$("#small_wrap").css("margin-left", marginList);
+					return false;
+				})
+			}
+		})
+		
+		
+		
+		
+	})
+
+</script>
 </head>
 <body>
 	<div class="container">
+	
 		<div id="top">		
-			<ul id="category">
-				<li><a href="#">test1</a> > </li>
-				<li><a href="#">test2</a> > </li>
-				<li><a href="">tes3</a></li>
-			</ul>
+			<ul id="category"></ul>
 			<div id="icons">
-				<a href="#"><img src="images/icon01.png"></a>
-				<a href="#"><img src="images/icon02.png"></a>
+				<a href="#"><img src="images/icon01.png" alt="아이콘"></a>
+				<a href="#"><img src="images/icon02.png" alt="아이콘"></a>
 			</div>
 		</div>
+		
+		<div id="img_wrap">
+			<div id="big_img"></div>
+			
+			<div id="small_imgs">
+				<a href="#" id="prev"><img src="images/icon_left.png" alt="이전아이콘" /></a>
+				<a href="#" id="next"><img src="images/icon_right.png" alt="다음아이콘" /></a>
+				<div id="frame">
+					<ul id="small_wrap"></ul>
+				</div>
+			</div>
+		</div>
+		
+		<div id="order_wrap"></div>
 	</div>
 </body>
 </html>
