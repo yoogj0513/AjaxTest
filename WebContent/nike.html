@@ -4,19 +4,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean');
+	
 	* {
 		margin: 0;
 		padding: 0;
+		font-family: 'Noto Sans KR', sans-serif;
 	}
 	
 	li {
 		list-style: none;
 	}
+	
+	a {
+		text-decoration: none;
+		color: #000;
+	}
 
 	.container {
 		width: 980px;
 		margin: 10px auto;
-		overflow: hidden;
 	}
 	
 	#top {
@@ -36,7 +43,6 @@
 	
 	#category li a {
 		color: gray;
-		text-decoration: none;
 		font-size: 14px;
 	}
 	
@@ -133,10 +139,317 @@
 		width: 470px;
 		float: right;
 	}
+	
+	#order_wrap > p {
+		text-align: right;
+		padding: 15px 0;
+		border-top: 1px solid #ccc;
+		border-bottom: 1px solid #ddd;
+		color: #767676;
+	}
+	
+	#title_wrap {
+		padding: 10px 0;
+		overflow: hidden;
+		border-bottom: 1px solid #ddd;
+	}
+	
+	#title {
+		font-size: 20px;
+		color: #4d4d4d;
+		margin-bottom: 20px;
+	}
+	
+	#title_wrap p:nth-of-type(2) {
+		font-size: 22px;
+		float: left;
+	}
+	
+	#price {
+		font-size: 44px;
+	}
+	
+	#btn1 {
+		float: left;
+		padding: 3px 8px;
+		border: 1px solid #DA006B;
+		border-radius: 2px;
+		background-color: #fff;
+		color: #DA006B;
+		margin-left: 10px;
+		margin-top: 25px;
+		cursor: pointer;
+	}
+	
+	#banner {
+		clear: both;
+		margin-top: 40px;
+		background-color: #F5F5F5;
+		font-size: 13px;
+		overflow: hidden;
+		padding: 10px;
+		margin-bottom: 15px;
+	}
+	
+	#banner p {
+		width: 48%;
+		background: url('images/icon_right.png') no-repeat;
+		background-position: right; 
+	}
+	
+	#banner p:first-child {
+		float: left;
+		border-right: 1px solid #ddd;
+		background-position: 95%; 
+	}
+	
+	#banner p:last-child {
+		float: right;
+	}
+	
+	#banner p a {
+		color: #767676;
+		font-weight: 500;
+		display: block;
+	}
+	
+	#buy_wrap {
+		overflow: hidden;
+		height: 60px;
+	}
+	
+	.buy_btn{
+		width: 41.8%;
+		height: 100%;
+		float: left;
+		border-radius: 2px;
+		box-sizing: border-box;
+		margin-right: 5px;
+	}
+	
+	.buy_btn a {
+		display: block;
+		line-height: 60px;
+		text-align: center;
+		font-size: 20px;
+		height: 100%;
+	}
+	
+	.buy_btn:nth-of-type(1){
+		width: 14%;
+		border: 1px solid #aaa;
+	}
+	
+	.buy_btn:nth-of-type(2) {
+		border: 1px solid #DA006B;
+	}
+	
+	.buy_btn:nth-of-type(2) a {
+		color: #DA006B;		
+	}
+	
+	.buy_btn:nth-of-type(3) {
+		background-color: #DA006B;
+		margin-right: 0;
+	}
+	
+	.buy_btn:nth-of-type(3) a {
+		color: #fff;
+	}
+
+	.buy_btn img {
+		margin-top: 17px;
+	}
+	
+	#select_wrap {
+		min-height: 200px;
+	}
+	
+	#sel1 {
+		z-index: 1;
+	}
+	
+	.select_box {
+		width: 100%;
+		border: 1px solid #bbb;
+		font-size: 15px;
+		color: #111;
+		box-sizing: border-box;
+		cursor: pointer;
+		position: relative;
+	}
+	
+	.select_box > a {
+		padding: 10px 15px;
+		display: block;
+	}
+	
+	.select_box .text {
+		color: #111;
+	}
+	
+	.select_box .sel_icon {
+		float: right;
+	}
+	
+	.list_wrap {
+		position: absolute;
+		width: 100%;
+		height: 280px;
+		top: 43px;
+		left: -1px;
+		border: 1px solid #000;
+		border-top: none;
+		overflow-y: scroll;
+		background-color: #fff;
+		/* display: none;  */
+	}
+	
+	.list_item {
+		overflow: hidden;
+		border-bottom: 1px solid #ddd;
+		position: relative;
+	}
+	
+	.list_item:hover {
+		background-color: #E6FFFF;
+	}
+	
+	.list_item .list_img {
+		width: 83px;
+		height: 83px;
+		float: left;
+		text-align: center;
+		background-color: #EFEFF1;
+	}
+	
+	.list_img img {
+		width: 90%;
+		height: 90%;
+		margin-top: 5px;
+	}
+	
+	.list_item .item_text {
+		float: left;
+		margin-left: 10px;
+		padding: 8px 0;
+		color: #4d4d4d;
+	}
+	
+	.item_title {
+		word-break: break-all;
+    	width: 300px;
+	}
+	
+	#sel2 {
+		margin-top: 10px;
+	}
+	
+	#sel2 .list_item {
+		padding: 10px 15px;
+		color: #4d4d4d;
+	}
+	
+	.item_price {
+		padding-right: 15px;
+	}
+	
+	.item_price_sub {
+		color: #767676;
+		padding-left: 15px;
+		position: relative;
+	}
+	
+	.item_price_sub::before {
+		content: "";
+		width: 1px;
+		height: 15px;
+		background-color: #ddd;
+		display: block;
+		position: absolute;
+		top: 4px;
+		left: 0;
+	}
+	
+	#sel1 .item_price_sub {
+		color: #da006b;
+	}
+	
+	.icon_check {
+		position: absolute;
+		right: 15px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	.select_box2 {
+		background-color: #FAFAFA;
+		padding: 15px;
+		margin-top: 30px;
+		overflow: hidden;
+		position: relative;
+		display: none;
+	}
+	
+	.sel_title {
+		font-size: 14px;
+		color: #4d4d4d;
+	}
+	
+	.product_con {
+		overflow: hidden;
+		margin-top: 10px;
+	}
+	
+	.product_con a {
+		width: 30px;
+		height: 28px;
+		border: 1px solid #ccc;
+		display: block;
+		float: left;
+		text-align: center;
+	}
+	
+	.con_input {
+		float: left;
+		width: 40px;
+		height: 28px;
+		border: none;
+		border-top: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+		text-align: center;
+	}
+	
+	.item_price3 {
+		position: absolute;
+		right: 30px;
+		bottom: 15px;
+		font-size: 19px;
+	}
+	
+	.close_icon {
+		position: absolute;
+		right: 30px;
+		top: 15px;
+	}
+	
+	.total {
+		text-align: right;
+		color: #da006b;
+		font-size: 16px;
+		padding: 5px 0;
+		display: none;
+	}
+	
+	.total_price {
+		font-size: 30px;
+	}
+	
+	
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- jquery ui plugin 사용 -->
-<script src="js/jquery-ui.min.js"></script>
+<!-- <script src="js/jquery-ui.min.js"></script> -->
 <script>
 
 	$(function(){
@@ -216,11 +529,133 @@
 					$("#small_wrap").css("margin-left", marginList);
 					return false;
 				})
+				
+				
+				//rihgt-title
+				var appCon = res.appeal_count.toLocaleString();
+				$("#count").text(appCon);
+				
+				var title = res.product_title;
+				$("#title").text(title);
+				
+				var price = res.current_price.toLocaleString();
+				$("#price").text(price);
+				
+				//list-wrap selbox1
+				$(res.items).each(function(i, obj) {
+					var selBoxImgs = obj.image;
+					var selBoxTitle = obj.title;
+					var selBoxPrice = obj.price.toLocaleString();
+					var selBoxOrginPrice = obj.original_price.toLocaleString();
+					var selBoxCoupon = obj.coupon; 
+					
+					var $imgSel1 = $("<img>").attr("src", "images/"+selBoxImgs);
+					var $div1_Sel1 = $("<div>").addClass("list_img").append($imgSel1);
+					var $p1_Sel1 = $("<p>").addClass("item_title").text(selBoxTitle);
+					var $span1_Sel1 = $("<span>").addClass("item_price").text(selBoxPrice + "원");
+					var $span2_Sel1 = $("<span>");
+					
+					if(selBoxCoupon != 0) {
+						$span2_Sel1.addClass("item_price_sub").text("쿠폰" + selBoxCoupon + "%");
+					}
+					
+					var $p2_Sel1 = $("<p>").append($span1_Sel1).append($span2_Sel1);
+					var $div2_Sel1 = $("<div>").addClass("item_text").append($p1_Sel1).append($p2_Sel1);
+					
+					var $liSel1 = $("<li>").addClass("list_item").append($div1_Sel1).append($div2_Sel1);
+					
+					$("#sel1").find(".list").append($liSel1);
+					
+				})
+				
+				
 			}
 		})
 		
 		
+		$(document).on('click', '.border_color', function(){
+			$('.border_color').removeClass('on');
+			$(this).addClass('on');
+			
+			var imgSrc = $(this).find('img').attr('src');
+			$('#big_img img').attr('src', imgSrc);
+			
+			return false;
+		})
 		
+		var $imgCheckIcon = $("<img>").addClass("icon_check").attr("src", "images/icon_check.png").attr("alt", "선택됨 아이콘");
+		var list1 = $(".list_wrap").eq(0).hide();
+		var list2 = $(".list_wrap").eq(1).hide();
+		var sel2 = $("#sel2").hide();
+		
+		$("#sel1").find("a").click(function(){
+			list1.toggle();
+			if(list1.css('display') == 'block'){
+				$(this).find(".sel_icon img").attr('src', 'images/icon_up.png');
+				$("#sel1").css('border-color', '#000')
+			} else {
+				$(this).find(".sel_icon img").attr('src', 'images/icon_down.png');	
+				$("#sel1").css('border-color', '#ddd');
+			}
+			return false;
+		});
+		
+		$(document).on("click", ".list_item", function(){
+			$(this).append($imgCheckIcon).html();
+			$("#sel1").css('border-color', '#ddd');
+			$("#sel1 .sel_icon img").attr('src', 'images/icon_down.png');	
+			list1.hide();
+			var itemTitle = $(this).find(".item_title").text();
+			
+			$.ajax({
+				url:"nike_data.json",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					$(res.items).each(function(i, obj) {
+						var objTitle = obj.title;
+						
+						
+						if(objTitle == itemTitle){
+							for(i=0; i<obj.sizes.length; i++){
+								var price = obj.price.toLocaleString();
+								var size = obj.sizes[i].size;
+								var count = obj.sizes[i].count;
+								
+								var $p1_Sel2 = $("<p>").addClass("size").text(size);
+								var $span1_Sel2 = $("<span>").addClass("item_price").text(price + "원");
+								var $span2_Sel2 = $("<span>").addClass("item_price_sub").text("남은 수량 " + count + "개");
+								var $p2_Sel2 = $("<p>").append($span1_Sel2).append($span2_Sel2);
+								var $liSel2 = $("<li>").addClass("list_item").append($p1_Sel2).append($p2_Sel2);
+								$("#sel2").find(".list").append($liSel2);
+							}
+						}
+					})
+				}
+			})
+			
+			sel2.show();
+		})
+		
+		$("#sel2").find("a").click(function(){
+			list2.toggle();
+			if(list2.css('display') == 'block'){
+				$(this).find(".sel_icon img").attr('src', 'images/icon_up.png');
+				$("#sel2").css('border-color', '#000')
+			} else {
+				$(this).find(".sel_icon img").attr('src', 'images/icon_down.png');	
+				$("#sel2").css('border-color', '#ddd');
+			}
+			return false;
+		})
+		
+		$(document).on("click", "#sel2 .list_item", function(){
+			$("#sel2").css('border-color', '#ddd');
+			$("#sel2 .sel_icon img").attr('src', 'images/icon_down.png');	
+			$("#sel2").find(".list_item").remove();
+			list2.hide();
+			sel2.hide();
+		})
 		
 	})
 
@@ -249,7 +684,61 @@
 			</div>
 		</div>
 		
-		<div id="order_wrap"></div>
+		<div id="order_wrap">
+			
+			<p><span id="count"></span>개 구매</p>
+			<div id="title_wrap">
+				<p id="title"></p>
+				<p><span id="price"></span>원~</p>
+				<button type="button" id="btn1">혜택보기</button>
+			</div>
+			
+			<div id="banner">
+				<p><a href="#">구매 전 적립금 5,000원 받기</a></p>
+				<p><a href="#">카드 무이자 혜택보기(최대 6개월)</a></p>
+			</div>
+			
+			<div id="select_wrap">
+				<div class="select_box" id="sel1">
+					<a href="#">
+						<span class="text">상품을 선택하세요</span>
+						<span class="sel_icon"><img src="images/icon_down.png" alt="icon"></span>
+					</a>
+					<div class="list_wrap">
+						<ul class="list"></ul>
+					</div>
+				</div>
+				
+				<!-- 상품 선택 후 나타나는 사이즈 박스 -->
+				<div class="select_box" id="sel2">
+					<a href="#">
+						<span class="text">사이즈</span>
+						<span class="sel_icon"><img src="images/icon_down.png" alt="icon"></span>
+					</a>
+					<div class="list_wrap">
+						<ul class="list"></ul>
+					</div>
+				</div>
+				
+				<!-- 상품, 사이즈 선택 후 선택된 상품 box -->
+				<div class="select_box2">
+					<!-- <p class="sel_title">선택1)남성 나이키 ....</p>
+					<div class="product_con">
+						<a href="#" class="sub_btn"><img src="images/icon_sub.png" alt="빼기" /></a>
+						<input class="con_input" type="text" value="1"/>
+						<a href="#" class="add_btn"><img src="images/icon_add.png" alt="더하기" /></a>
+					</div>
+					<p class="item_price3">89000원</p>
+					<a href="#" class="close_icon"><img src="images/icon_close.png" alt="닫기아이콘" /></a> -->
+				</div> 
+				<p class="total">총 <span class="total_price">00,000</span>원</p>
+			</div>
+			<div id="buy_wrap">
+				<div class="buy_btn"><a href="#"><img src="images/icon03.png" alt="좋아요" /></a></div>
+				<div class="buy_btn"><a href="#">장바구니</a></div>
+				<div class="buy_btn"><a href="#">바로구매</a></div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
